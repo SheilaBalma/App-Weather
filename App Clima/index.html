@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> 
+    <title>Weather App</title>
+</head>
+<body>
+    <h1>Clima App</h1>
+    <div id="weather"></div>
+
+<!--Buscador de Ciudad-->
+    <form id="buscar-nueva-ciudad">
+        <input type="text" id="entradaCiudad" placeholder="Escriba la ciudad" required>
+        <button type="submit">Buscar Clima</button>
+    </form>
+
+<!--Buscador de ubicación-->
+    <button id="buscar-ubicación">Obtener clima de mi ubicación</button>
+
+<!--Mostrar clima-->
+    <div id="contenedorClima"></div> 
+
+<!--Cambiar grados-->
+    <button id="cambiar-grados">Cambiar medición de grados</button>
+
+<!--Conexión con JS-->
+    <script src="app.js"></script> 
+</body>
+</html>
