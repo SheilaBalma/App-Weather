@@ -6,8 +6,6 @@ Este repositorio contiene dos proyectos relacionados con la manipulación de cad
 
 1. [Decodificación de Mensajes con Paréntesis](#decodificación-de-mensajes-con-paréntesis)
 2. [Verificación de Palíndromo con Intercambio](#verificación-de-palíndromo-con-intercambio)
-3. [Cómo Ejecutar los Proyectos](#cómo-ejecutar-los-proyectos)
-4. [Requisitos](#requisitos)
 
 ## Decodificación de Mensajes con Paréntesis
 
