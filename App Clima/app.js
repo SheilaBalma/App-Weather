@@ -1,8 +1,8 @@
-const apiKey = Clave-de-la-Api; // Aqui va tu clave
+const apiKey = 'Tu_Api_Key'; // Aqui tu clave de la APi
 let datosClimaActual;
 let esCelsius = true; 
 
-// Obtener clima de Mykonos por defecto
+// Obtener clima de Mykonos 
 const ciudad = 'Mykonos';
 const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${apiKey}&units=metric`;
 
@@ -16,7 +16,7 @@ fetch(apiUrl)
 
 // Buscar clima por ciudad
 function BuscarCiudad(nuevaCiudad) {
-    const urlApi = `https://api.openweathermap.org/data/2.5/weather?q=${nuevaCiudad}&appid=${apiKey}&units=metric`;
+    const urlApi = `https://api.openweathermap.org/data/2.5/weather?q=${nuevaCiudad}&appid=${apiKey}&units=metric&lang=es`;
     fetch(urlApi)
         .then(respuesta => respuesta.json())
         .then(datos => {
@@ -28,7 +28,7 @@ function BuscarCiudad(nuevaCiudad) {
 
 // Buscar clima por ubicación
 function climaPorUbicacion(latitud, longitud) {
-    const urlApi = `https://api.openweathermap.org/data/2.5/weather?lat=${latitud}&lon=${longitud}&appid=${apiKey}&units=metric`;
+    const urlApi = `https://api.openweathermap.org/data/2.5/weather?lat=${latitud}&lon=${longitud}&appid=${apiKey}&units=metric&lang=es`;
     fetch(urlApi)
         .then(respuesta => respuesta.json())
         .then(datos => {
@@ -38,8 +38,29 @@ function climaPorUbicacion(latitud, longitud) {
         .catch(error => console.error('Error al obtener el clima:', error));
 }
 
-// Función para mostrar el clima
+// Cambiar el fondo según el icono del clima
+function cambiarFondoSegunIcono(icono) {
+    if (icono.startsWith('01')) {
+        // Sol
+        document.body.className = "fondo-sol";
+    } else if (icono.startsWith('02') || icono.startsWith('03') || icono.startsWith('04')) {
+        // Nublado
+        document.body.className = "fondo-nublado";
+    } else if (icono.startsWith('09') || icono.startsWith('10')) {
+        // Lluvia
+        document.body.className = "fondo-lluvia";
+    } else if (icono.startsWith('13')) {
+        // Nieve
+        document.body.className = "fondo-nieve";
+    } else if (icono.startsWith('50')) {
+        // Niebla o viento
+        document.body.className = "fondo-viento";
+    }
+}
+
 function mostrarClima(datos) {
+    const icono = `http://openweathermap.org/img/wn/${datos.weather[0].icon}.png`;
+    cambiarFondoSegunIcono(datos.weather[0].icon);
     const ciudad = datos.name;
     const fecha = obtenerFechaActual();
     const temperatura = esCelsius ? datos.main.temp : (datos.main.temp * 9/5) + 32; 
@@ -49,21 +70,6 @@ function mostrarClima(datos) {
     const velocidadViento = datos.wind.speed;
     const direccionViento = datos.wind.deg;
     const descripcion = datos.weather[0].description;
-    const icono = `http://openweathermap.org/img/wn/${datos.weather[0].icon}.png`;
-
-     // Cambiar el fondo según el clima
-     if (descripcion.includes("sol") || descripcion.includes("clear")) {
-        document.body.className = "fondo-sol";
-    } else if (descripcion.includes("nublado") || descripcion.includes("clouds")) {
-        document.body.className = "fondo-nublado";
-    } else if (descripcion.includes("lluvia") || descripcion.includes("rain")) {
-        document.body.className = "fondo-lluvia";
-    } else if (descripcion.includes("nieve") || descripcion.includes("snow")) {
-        document.body.className = "fondo-nieve";
-    } else if (descripcion.includes("viento") || descripcion.includes("wind")) {
-        document.body.className = "fondo-viento";
-    }
-
 
     contenedorClima.innerHTML = 
     `
@@ -113,3 +119,58 @@ document.getElementById('buscar-nueva-ciudad').addEventListener('submit', functi
     const nuevaCiudad = document.getElementById('entradaCiudad').value;
     BuscarCiudad(nuevaCiudad);
 });
+
+function obtenerPronostico5Dias(ciudad) {
+    const urlApiPronostico = `https://api.openweathermap.org/data/2.5/forecast?q=${ciudad}&appid=${apiKey}&units=metric&lang=es`;
+    fetch(urlApiPronostico)
+        .then(respuesta => respuesta.json())
+        .then(datos => {
+            mostrarPronostico(datos);
+        })
+        .catch(error => console.error('Error al obtener el pronóstico:', error));
+}
+
+// Función para mostrar el pronóstico de 5 días con los días correctos
+function mostrarPronostico(datos) {
+    const pronosticosDiarios = [];
+    const horasDeseadas = ['12:00:00'];
+
+    datos.list.forEach((item) => {
+        const horaActual = item.dt_txt.split(' ')[1];
+        if (horasDeseadas.includes(horaActual)) {
+            pronosticosDiarios.push(item);
+        }
+    });
+
+    const pronosticoHtml = pronosticosDiarios.map(dia => {
+        const fecha = new Date(dia.dt * 1000).toLocaleDateString('es-ES', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long'
+        });
+        const temperaturaMin = dia.main.temp_min;
+        const temperaturaMax = dia.main.temp_max;
+        const descripcion = dia.weather[0].description;
+        const icono = `http://openweathermap.org/img/wn/${dia.weather[0].icon}.png`;
+
+        return `
+            <div class="dia-pronostico">
+                <h3>${fecha}</h3>
+                <img src="${icono}" alt="${descripcion}">
+                <p>${descripcion}</p>
+                <p>Temp Min: ${temperaturaMin.toFixed(1)}°C</p>
+                <p>Temp Max: ${temperaturaMax.toFixed(1)}°C</p>
+            </div>
+        `;
+    }).join('');
+
+    document.getElementById('contenedorPronostico').innerHTML = pronosticoHtml;
+}
+
+// Para mostrar el pronóstico al hacer clic en el botón
+document.getElementById('mostrar-pronostico').addEventListener('click', function() {
+    if (datosClimaActual && datosClimaActual.name) {
+        obtenerPronostico5Dias(datosClimaActual.name);
+    }
+});
+

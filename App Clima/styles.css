@@ -12,8 +12,9 @@ body {
 
 h1 {
     font-size: 2.5rem;
-    color: #2c3e50;
-    margin-bottom: 20px;
+    background-color: #1d1e1bb3;
+    color: #cbd7f1;
+    margin-bottom: 30px;
 }
 
 h2 {
@@ -84,17 +85,54 @@ p {
     margin-bottom: 20px;
 }
 
+.contenedor-botones {
+    display: flex;
+    gap: 10px; 
+    justify-content: center;
+}
+
 /* Estilo del botón de cambiar grados */
 #cambiar-grados {
     padding: 10px 15px;
     font-size: 1rem;
     color: white;
-    background-color: #27ae60;
+    background-color: #62d894;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
+#mostrar-pronostico {
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: white;
+    background-color: #7197ae;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Estilo del contenedor del pronóstico de 5 días */
+#contenedorPronostico {
+    display: flex;
+    gap: 10px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* Estilo de cada día del pronóstico */
+.dia-pronostico {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 120px;
+    text-align: center;
+}
+
 
 #cambiar-grados:hover {
     background-color: #218c4b;
@@ -102,8 +140,8 @@ p {
 
 /* Estilo de las imágenes */
 #contenedorClima img {
-    width: 100px; /* Ajusta el tamaño de la imagen */
-    height: auto; /* Mantiene la proporción */
+    width: 100px;
+    height: auto; 
 }
 
 /* Fondos según clima */
