@@ -15,18 +15,6 @@ Este repositorio contiene dos proyectos relacionados con la manipulación de cad
 
 En este proyecto, se toma una cadena de texto en la que algunas letras están rodeadas por paréntesis. El contenido dentro de los paréntesis debe ser invertido y los paréntesis deben ser eliminados en el resultado final. Es posible que los paréntesis estén anidados, por lo que se debe manejar correctamente la inversión de los caracteres en el orden correcto.
 
-### Ejemplos
-
-```javascript
-const a = decode('hola (odnum)');
-console.log(a); // Output: "hola mundo"
-
-const b = decode('(olleh) (dlrow)!');
-console.log(b); // Output: "hello world!"
-
-const c = decode('sa(u(cla)atn)s');
-console.log(c); // Output: "santaclaus"
-
 # Verificación de Palíndromo con Intercambio
 
 Este proyecto consiste en verificar si es posible convertir una cadena de texto en un palíndromo realizando un solo intercambio de letras. Un palíndromo es una palabra que se lee igual hacia adelante y hacia atrás.
@@ -41,7 +29,20 @@ La función principal del proyecto es `getIndexsForPalindrome`, que recibe una c
 - Si no se puede formar un palíndromo con un solo intercambio, la función devuelve `null`.
 - Si se puede formar un palíndromo con un único intercambio, la función devuelve un array con los dos índices de los caracteres que deben ser intercambiados.
 
-## Ejemplos
+
+### Ejemplos-de-Decodificación-y-de-Palídromo
+
+```javascript
+const a = decode('hola (odnum)');
+console.log(a); // Output: "hola mundo"
+
+const b = decode('(olleh) (dlrow)!');
+console.log(b); // Output: "hello world!"
+
+const c = decode('sa(u(cla)atn)s');
+console.log(c); // Output: "santaclaus"
+ 
+ -------------
 
 ```javascript
 getIndexsForPalindrome('anna'); // Output: []
