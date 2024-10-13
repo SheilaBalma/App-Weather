@@ -16,7 +16,6 @@ Esta es una aplicación de clima desarrollada con JavaScript y utilizando la API
 - **JavaScript**: Para la manipulación del DOM y la lógica de la aplicación.
 - **HTML y CSS**: Estructura y estilos de la aplicación.
 - **OpenWeather API**: Servicio de API para obtener los datos del clima.
-- **GitHub Pages (opcional)**: Para desplegar la aplicación en la web.
 
 ## Instalación y uso 📋
 
