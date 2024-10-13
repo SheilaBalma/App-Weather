@@ -11,16 +11,16 @@ Este repositorio contiene dos proyectos relacionados con la manipulación de cad
 
 ## Decodificación de Mensajes con Paréntesis
 
-### Descripción
+#### Descripción
 
 En este proyecto, se toma una cadena de texto en la que algunas letras están rodeadas por paréntesis. El contenido dentro de los paréntesis debe ser invertido y los paréntesis deben ser eliminados en el resultado final. Es posible que los paréntesis estén anidados, por lo que se debe manejar correctamente la inversión de los caracteres en el orden correcto.
 
-# Verificación de Palíndromo con Intercambio
 
-Este proyecto consiste en verificar si es posible convertir una cadena de texto en un palíndromo realizando un solo intercambio de letras. Un palíndromo es una palabra que se lee igual hacia adelante y hacia atrás.
+## Verificación de Palíndromo con Intercambio
 
-## Descripción
+#### Descripción
 
+Un palíndromo es una palabra que se lee igual hacia adelante y hacia atrás.
 La función principal del proyecto es `getIndexsForPalindrome`, que recibe una cadena de caracteres y determina si es posible transformarla en un palíndromo con un único intercambio de letras. 
 
 ### Comportamiento de la función
